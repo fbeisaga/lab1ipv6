@@ -24,6 +24,15 @@ topology:
         - router2/frr.conf:/etc/frr/frr.conf
       exec:
        - "sysctl -w net.ipv6.conf.all.forwarding=1"
+
+    frr3:  #router3
+      kind: linux
+      image: quay.io/frrouting/frr:8.4.1
+      binds:
+        - router3/daemons:/etc/frr/daemons
+        - router3/frr.conf:/etc/frr/frr.conf
+      exec:
+       - "sysctl -w net.ipv6.conf.all.forwarding=1"
     
     PC2:
       kind: linux
@@ -35,4 +44,5 @@ topology:
   links:
    - endpoints: ["PC1:eth1", "frr1:eth1"]
    - endpoints: ["frr1:eth2", "frr2:eth1"]
-   - endpoints: ["frr2:eth2", "PC2:eth1"]
+   - endpoints: ["frr2:eth2", "frr3:eth1"]
+   - endpoints: ["frr3:eth2", "PC2:eth1"]
