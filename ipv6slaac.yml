@@ -1,6 +1,7 @@
 name: ipv6slaac
 topology:
   nodes:
+        
     PC1:
       kind: linux
       image: praqma/network-multitool:extra
